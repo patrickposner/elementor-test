@@ -70,6 +70,10 @@ if (null !== form_config_element) {
         );
 
         allForms.forEach((form) => {
+            // Create a clone of the form to get rid of existing event handlers.
+            form.replaceWith(form.cloneNode(true));
+
+            // Modify form attributes.
             modifyFormAttributes(form);
 
             // Inputs
@@ -82,6 +86,7 @@ if (null !== form_config_element) {
                 }
             });
 
+            // Add our own event listener.
             form.addEventListener("submit", function (el) {
                 el.preventDefault();
 
