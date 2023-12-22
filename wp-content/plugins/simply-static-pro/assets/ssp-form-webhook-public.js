@@ -70,9 +70,6 @@ if (null !== form_config_element) {
         );
 
         allForms.forEach((form) => {
-            // Create a clone of the form to get rid of existing event handlers.
-            form.replaceWith(form.cloneNode(true));
-
             // Modify form attributes.
             modifyFormAttributes(form);
 
@@ -96,12 +93,12 @@ if (null !== form_config_element) {
                 if (form.className.includes('wpcf7-form')) {
                     // Get the current form id.
                     form_id = form.parentNode.id;
+                }  else if (form.className.includes('elementor-form')) {
+                    form_id = form.querySelector("[name='form_id']").value;
                 } else if (form.parentNode.className.includes('gform_wrapper')) {
                     // Get the current form id.
                     let form_id_data = form.id.split('_');
                     form_id = form_id_data[1];
-                } else if (form.className.includes('elementor-form')) {
-                    form_id = form.querySelector("[name='form_id']").value;
                 }
 
                 // Get form settings based on id.
